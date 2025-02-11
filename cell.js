@@ -11,7 +11,22 @@ export class Cell {
         tile.setXY(this.x , this.y);
         this.LinkedTile = tile;
     }
+    unlinkTile(){
+        this.LinkedTile = null;
+    }
     isEmpty(){
         return !this.LinkedTile; //вернет false or true взависимости от того есть ли у ячейки привязаная плитка
+    }
+
+    linkedTileForMerge(tile){
+        tile.setXY(this.x, this.y);
+        this.linkedTileForMerge = tile;
+    }
+    hasTileForMerge(){
+        return !!this.linkedTileForMerge;
+    }
+
+    canAccept(newTile){
+        return this.isEmpty()||(!this.hasTileForMerge() && this.LinkTile.value === newTile.value);
     }
 }

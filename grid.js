@@ -14,10 +14,19 @@ export class Grid{
          new Cell(gridElement, i%GRID_SIZE , Math.floor(i / GRID_SIZE))
         )
      }
+     this.cellsGroupedByColumn = this.groupCellsByColumn();
     }
     getRandomEmptyCell(){
         const emptyCells = this.cells.filter(cell => cell.isEmpty()); //отфильтровываем пустые ячейки
         const randomIndex = Math.floor(Math.random() * emptyCells.length);//определяем случайную пустую ячейку
         return emptyCells[randomIndex] //случайная ячейка со случайным индексом
+    }
+
+    groupCellsByColumn(){
+        return this.cells.reduce((groupedCells, cell) => { // групировка ячеек в новый масив ..
+       groupedCells[cell.x] = groupedCells[cell.x] || [];
+       groupedCells[cell.x][cell.y] = cell;
+       return groupedCells;
+        }, []);
     }
 }
